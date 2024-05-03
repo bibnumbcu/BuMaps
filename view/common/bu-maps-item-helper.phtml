@@ -1,0 +1,34 @@
+
+<?php if ($coordinates): ?>
+<script>
+   let latitude = <?php echo $coordinates[0]['latitude']; ?>;
+   let longitude = <?php echo $coordinates[0]['longitude']; ?>;
+   let mymap = L.map("map").setView([latitude, longitude], '6');
+   L.tileLayer("https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
+                  attribution: 'Open Street Map &copy; <a href="http://cartodb.com/attributions">CartoDB</a> ',
+                  subdomains: 'abcd',
+                     maxZoom: 20
+               }).addTo(mymap);
+
+
+   <?php 
+        $latlngs = '';
+        $javascript = '';
+        foreach($coordinates as $key => $one_coord){
+            $javascript .= 'var marker'.$key.' = L.marker(['.$one_coord['latitude'].', '.$one_coord['longitude'].']).addTo(mymap)
+            .bindPopup("'.$one_coord['address'].'")
+            .openPopup()
+            ;';
+            $latlngs .= '['.$one_coord['latitude'].','.$one_coord['longitude'].'],';
+        }
+
+        $javascript .= 'mymap.fitBounds([';
+        $javascript .= $latlngs;
+        $javascript .= '], 6);';
+        echo $javascript;
+   ?>
+</script>
+<?php endif; ?>
+
+
+    
