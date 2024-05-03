@@ -6,13 +6,8 @@ Il affiche les localisations présentes dans le champ dublin core "couverture" d
 ## Utilisation
 Ce module s'appelle via des helpers :
 - pour un item 
-`<div id="map" class="mt-5 map">
-    <?php echo $this->BuMapsItem('Item', $resource); ?>
-</div>`
-- pour une collection 
-`<div id="map" class="mt-5 map">
-    <?php echo $this->BuMapsItem('ItemSet', $itemSet); ?>
-</div>`
+`<div id="map"> <?php echo $this->BuMapsItem('Item', $resource); ?> </div>`
+- pour une collection `<div id="map"> <?php echo $this->BuMapsItem('ItemSet', $itemSet); ?> </div>`
 
 
     
